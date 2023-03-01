@@ -20,33 +20,33 @@ import com.zaxxer.hikari.HikariDataSource;
 @MapperScan(value = "com.kusumika.school.mapper.kusumikadb", sqlSessionFactoryRef = "kusumikaSqlSessionFactory")
 public class KusumikaDataSourceConfig {
 
-	@Bean
-	@Primary
-	public KusumikaMapper kusumikaMapper() throws Exception {
-		SqlSessionTemplate sessionTemplate = new SqlSessionTemplate(kusumikaSqlSessionFactoryBean());
-		return sessionTemplate.getMapper(KusumikaMapper.class);
-	}
-	
-	@Bean(name = "kusumikaSqlSessionFactory")
-	@Primary
-	public SqlSessionFactory kusumikaSqlSessionFactoryBean() throws Exception {
-		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-		sqlSessionFactoryBean.setDataSource(kusumikaDataSource());
-		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:/mapper/kusumikadb/*.xml"));
-		return sqlSessionFactoryBean.getObject();
-	}
-	
-	@Bean(name = "kusumikaDataSource")
-	@Primary
-	public DataSource kusumikaDataSource() {
-		return new HikariDataSource(kusumikaCustomHikariConfig());
-	}
-	
-	@Bean
-	@Primary
-	@ConfigurationProperties(prefix = "kusumika.datasource")
-	public HikariConfig kusumikaCustomHikariConfig() {
-		return new HikariConfig();
-	}
+    @Bean
+    @Primary
+    KusumikaMapper mapperConfig() throws Exception {
+        SqlSessionTemplate sessionTemplate = new SqlSessionTemplate(kusumikaSqlSessionFactoryBean());
+        return sessionTemplate.getMapper(KusumikaMapper.class);
+    }
+
+    @Bean(name = "kusumikaSqlSessionFactory")
+    @Primary
+    SqlSessionFactory kusumikaSqlSessionFactoryBean() throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(kusumikaDataSource());
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:/mapper/kusumikadb/*.xml"));
+        return sqlSessionFactoryBean.getObject();
+    }
+
+    @Bean(name = "kusumikaDataSource")
+    @Primary
+    DataSource kusumikaDataSource() {
+        return new HikariDataSource(kusumikaCustomHikariConfig());
+    }
+
+    @Bean
+    @Primary
+    @ConfigurationProperties(prefix = "kusumika.datasource")
+    HikariConfig kusumikaCustomHikariConfig() {
+        return new HikariConfig();
+    }
 }

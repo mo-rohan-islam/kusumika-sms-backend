@@ -3,9 +3,8 @@ package com.kusumika.school.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kusumika.school.bean.Student;
@@ -20,13 +19,13 @@ public class StudentController {
 	@Autowired
 	StudentService studentService;
 
-	@RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
+	@GetMapping("/student/{id}")
 	public Student getStudent(@PathVariable int id) {
 		log.info("Fetching student with id {}", id);
 		return studentService.getStudent(id);
 	}
 	
-	@RequestMapping(value = "/student", method = RequestMethod.GET)
+	@GetMapping("/student")
 	public List<Student> getStudents() {
 		log.info("Fetching all student details");
 		return studentService.getStudents();

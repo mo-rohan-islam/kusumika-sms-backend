@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.kusumika.school.mapper.kusumikadb.FeesMapper">
+	 
+	 <select id="getTotalFees" resultType="com.kusumika.school.bean.Fees">
+		select
+			admission_fees "admissionFees",
+			monthly_fees "monthlyFees"
+		from
+			kusumika.fees f
+		where
+			standard in (
+			select
+				standard
+			from
+				kusumika.student s
+			where
+				s.household_id = #{householdId});
+ 	</select>
+ 	
+ 	<select id="getFeesCollectionReport" resultType="com.kusumika.school.bean.FeesCollection">
+		select
+			payment_json "payments",
+			previous_due "previousDue",
+			advance_payment "advancePayment",
+			concession
+		from
+			kusumika.fees_collection fc
+		where
+			household_id = #{householdId};
+ 	</select>
+ 	
+</mapper>

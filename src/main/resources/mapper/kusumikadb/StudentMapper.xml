@@ -10,7 +10,7 @@
 			middle_name "middleName",
 			last_name "lastName",
 			standard,
-			class_roll "rollNo",
+			roll_no "rollNo",
 			date_of_birth "dob",
 			aadhar,
 			bank_ifsc "bankIfsc",
@@ -23,6 +23,27 @@
 			student_id = #{id};
  	</select>
  	
+ 	<select id="getStudentWithClassRoll" resultType="com.kusumika.school.bean.Student">
+		 select
+			student_id "studentId",
+			first_name "firstName",
+			middle_name "middleName",
+			last_name "lastName",
+			standard,
+			roll_no "rollNo",
+			date_of_birth "dob",
+			aadhar,
+			bank_ifsc "bankIfsc",
+			bank_account_number "accountNumber",
+			bank_account_holder "accountHolder",
+			household_id "householdId"
+		from
+			kusumika.student
+		where
+			standard = #{standard};
+			and roll_no = #{rollNo};
+ 	</select>
+ 	
  	<select id="getStudents" resultType="com.kusumika.school.bean.Student">
  		select
 			student_id "studentId",
@@ -30,7 +51,7 @@
 			middle_name "middleName",
 			last_name "lastName",
 			standard,
-			class_roll "rollNo",
+			roll_no "rollNo",
 			date_of_birth "dob",
 			aadhar,
 			bank_ifsc "bankIfsc",

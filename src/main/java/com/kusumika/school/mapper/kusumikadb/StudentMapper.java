@@ -12,6 +12,8 @@ public interface StudentMapper {
 
 	Student getStudent(@Param("id") int id);
 	
+	Student getStudentWithClassRoll(@Param("standard") String standard, @Param("rollNo") int rollNo);
+	
 	List<Student> getStudents();
 	
 }

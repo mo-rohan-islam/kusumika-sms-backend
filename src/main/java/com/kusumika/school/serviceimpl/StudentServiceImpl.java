@@ -22,6 +22,12 @@ public class StudentServiceImpl implements StudentService {
 	}
 	
 	@Override
+	public Student getStudent(String standard, int rollNo) {
+		Student student = studentMapper.getStudentWithClassRoll(standard, rollNo);
+		return student;
+	}
+	
+	@Override
 	public List<Student> getStudents() {
 		List<Student> studentList = studentMapper.getStudents();
 		return studentList;
